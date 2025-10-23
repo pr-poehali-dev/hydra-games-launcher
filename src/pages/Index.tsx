@@ -9,6 +9,7 @@ import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('home');
+  const [selectedGenre, setSelectedGenre] = useState<string>('all');
 
   const games = [
     {
@@ -248,6 +249,81 @@ const Index = () => {
               </div>
             </div>
 
+            <div className="flex gap-3 flex-wrap mb-6">
+              <Button
+                variant={selectedGenre === 'all' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedGenre('all')}
+                className={selectedGenre === 'all' ? 'neon-glow' : ''}
+              >
+                Все жанры
+              </Button>
+              <Button
+                variant={selectedGenre === 'Экшен' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedGenre('Экшен')}
+                className={selectedGenre === 'Экшен' ? 'neon-glow' : ''}
+              >
+                Экшен
+              </Button>
+              <Button
+                variant={selectedGenre === 'RPG' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedGenre('RPG')}
+                className={selectedGenre === 'RPG' ? 'neon-glow' : ''}
+              >
+                RPG
+              </Button>
+              <Button
+                variant={selectedGenre === 'Гонки' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedGenre('Гонки')}
+                className={selectedGenre === 'Гонки' ? 'neon-glow' : ''}
+              >
+                Гонки
+              </Button>
+              <Button
+                variant={selectedGenre === 'Хоррор' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedGenre('Хоррор')}
+                className={selectedGenre === 'Хоррор' ? 'neon-glow' : ''}
+              >
+                Хоррор
+              </Button>
+              <Button
+                variant={selectedGenre === 'Стратегия' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedGenre('Стратегия')}
+                className={selectedGenre === 'Стратегия' ? 'neon-glow' : ''}
+              >
+                Стратегия
+              </Button>
+              <Button
+                variant={selectedGenre === 'Спорт' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedGenre('Спорт')}
+                className={selectedGenre === 'Спорт' ? 'neon-glow' : ''}
+              >
+                Спорт
+              </Button>
+              <Button
+                variant={selectedGenre === 'Приключения' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedGenre('Приключения')}
+                className={selectedGenre === 'Приключения' ? 'neon-glow' : ''}
+              >
+                Приключения
+              </Button>
+              <Button
+                variant={selectedGenre === 'Открытый мир' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedGenre('Открытый мир')}
+                className={selectedGenre === 'Открытый мир' ? 'neon-glow' : ''}
+              >
+                Открытый мир
+              </Button>
+            </div>
+
             <Tabs defaultValue="all" className="w-full">
               <TabsList className="glass-effect">
                 <TabsTrigger value="all">Все игры</TabsTrigger>
@@ -256,7 +332,49 @@ const Index = () => {
               </TabsList>
               <TabsContent value="all" className="mt-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {games.map(game => (
+                  {games.filter(game => selectedGenre === 'all' || game.genre === selectedGenre).map(game => (
+                    <Card key={game.id} className="group cursor-pointer hover:scale-105 transition-all glass-effect">
+                      <div className="relative overflow-hidden rounded-t-lg">
+                        <img src={game.image} alt={game.title} className="w-full h-56 object-cover" />
+                        <div className="absolute top-2 right-2">
+                          <Badge className="bg-primary/80 neon-glow">{game.status}</Badge>
+                        </div>
+                        <div className="absolute top-2 left-2">
+                          <Badge variant="secondary" className="text-xs">{game.genre}</Badge>
+                        </div>
+                      </div>
+                      <CardHeader>
+                        <CardTitle className="font-orbitron text-lg">{game.title}</CardTitle>
+                        <CardDescription className="text-xs">{game.hours} часов</CardDescription>
+                      </CardHeader>
+                    </Card>
+                  ))}
+                </div>
+              </TabsContent>
+              <TabsContent value="installed" className="mt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {games.filter(game => (selectedGenre === 'all' || game.genre === selectedGenre) && game.status === 'Установлена').map(game => (
+                    <Card key={game.id} className="group cursor-pointer hover:scale-105 transition-all glass-effect">
+                      <div className="relative overflow-hidden rounded-t-lg">
+                        <img src={game.image} alt={game.title} className="w-full h-56 object-cover" />
+                        <div className="absolute top-2 right-2">
+                          <Badge className="bg-primary/80 neon-glow">{game.status}</Badge>
+                        </div>
+                        <div className="absolute top-2 left-2">
+                          <Badge variant="secondary" className="text-xs">{game.genre}</Badge>
+                        </div>
+                      </div>
+                      <CardHeader>
+                        <CardTitle className="font-orbitron text-lg">{game.title}</CardTitle>
+                        <CardDescription className="text-xs">{game.hours} часов</CardDescription>
+                      </CardHeader>
+                    </Card>
+                  ))}
+                </div>
+              </TabsContent>
+              <TabsContent value="downloading" className="mt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {games.filter(game => (selectedGenre === 'all' || game.genre === selectedGenre) && game.status === 'Загрузка').map(game => (
                     <Card key={game.id} className="group cursor-pointer hover:scale-105 transition-all glass-effect">
                       <div className="relative overflow-hidden rounded-t-lg">
                         <img src={game.image} alt={game.title} className="w-full h-56 object-cover" />
