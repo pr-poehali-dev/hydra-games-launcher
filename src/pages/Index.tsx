@@ -14,6 +14,7 @@ const Index = () => {
     {
       id: 1,
       title: 'Cyber Warriors',
+      genre: 'Экшен',
       image: 'https://cdn.poehali.dev/projects/92ff0717-d0d7-4050-b7f8-d0e47073312c/files/4d964f63-26d3-4075-b99f-6afe13663af4.jpg',
       progress: 75,
       hours: 48,
@@ -22,6 +23,7 @@ const Index = () => {
     {
       id: 2,
       title: 'Space Odyssey',
+      genre: 'Приключения',
       image: 'https://cdn.poehali.dev/projects/92ff0717-d0d7-4050-b7f8-d0e47073312c/files/1207a491-ecb7-41e1-966a-9c276fdb1cdf.jpg',
       progress: 100,
       hours: 124,
@@ -30,10 +32,56 @@ const Index = () => {
     {
       id: 3,
       title: 'Fantasy Realm',
+      genre: 'RPG',
       image: 'https://cdn.poehali.dev/projects/92ff0717-d0d7-4050-b7f8-d0e47073312c/files/081d0beb-1212-4f0c-9513-9f937593d001.jpg',
       progress: 45,
       hours: 32,
       status: 'Загрузка'
+    },
+    {
+      id: 4,
+      title: 'Neon Racing',
+      genre: 'Гонки',
+      image: 'https://cdn.poehali.dev/projects/92ff0717-d0d7-4050-b7f8-d0e47073312c/files/0a86bc7d-0fdf-47c2-8d92-8a6944745f65.jpg',
+      progress: 60,
+      hours: 22,
+      status: 'Установлена'
+    },
+    {
+      id: 5,
+      title: 'Dark Shadows',
+      genre: 'Хоррор',
+      image: 'https://cdn.poehali.dev/projects/92ff0717-d0d7-4050-b7f8-d0e47073312c/files/b61cb929-6a95-4795-8db8-4de977e93098.jpg',
+      progress: 30,
+      hours: 15,
+      status: 'Установлена'
+    },
+    {
+      id: 6,
+      title: 'Kingdom Wars',
+      genre: 'Стратегия',
+      image: 'https://cdn.poehali.dev/projects/92ff0717-d0d7-4050-b7f8-d0e47073312c/files/9f7b2525-00c8-4b42-8e82-0621d0f32ad8.jpg',
+      progress: 85,
+      hours: 96,
+      status: 'Установлена'
+    },
+    {
+      id: 7,
+      title: 'Pro Soccer 2025',
+      genre: 'Спорт',
+      image: 'https://cdn.poehali.dev/projects/92ff0717-d0d7-4050-b7f8-d0e47073312c/files/8d41b469-9e88-4f6f-b3e5-9aa89bbbba48.jpg',
+      progress: 0,
+      hours: 0,
+      status: 'Не установлена'
+    },
+    {
+      id: 8,
+      title: 'Wild Horizons',
+      genre: 'Открытый мир',
+      image: 'https://cdn.poehali.dev/projects/92ff0717-d0d7-4050-b7f8-d0e47073312c/files/66588633-0dab-4a65-a2ce-7ea7cd0a7f2f.jpg',
+      progress: 55,
+      hours: 67,
+      status: 'Установлена'
     }
   ];
 
@@ -150,14 +198,17 @@ const Index = () => {
 
             <div>
               <h3 className="text-2xl font-orbitron font-bold mb-6">Недавние игры</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {games.map(game => (
+              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {games.slice(0, 4).map(game => (
                   <Card key={game.id} className="group hover:scale-105 transition-all duration-300 glass-effect border-border/50">
                     <div className="relative overflow-hidden rounded-t-lg">
                       <img src={game.image} alt={game.title} className="w-full h-48 object-cover" />
                       <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
                     <CardHeader>
+                      <div className="flex items-center justify-between mb-2">
+                        <Badge variant="outline" className="text-xs">{game.genre}</Badge>
+                      </div>
                       <CardTitle className="font-orbitron">{game.title}</CardTitle>
                       <CardDescription>{game.hours} часов сыграно</CardDescription>
                     </CardHeader>
@@ -211,6 +262,9 @@ const Index = () => {
                         <img src={game.image} alt={game.title} className="w-full h-56 object-cover" />
                         <div className="absolute top-2 right-2">
                           <Badge className="bg-primary/80 neon-glow">{game.status}</Badge>
+                        </div>
+                        <div className="absolute top-2 left-2">
+                          <Badge variant="secondary" className="text-xs">{game.genre}</Badge>
                         </div>
                       </div>
                       <CardHeader>
