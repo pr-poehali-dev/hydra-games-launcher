@@ -72,7 +72,7 @@ const Index = () => {
             <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
               <Icon name="Gamepad2" className="text-white" size={24} />
             </div>
-            <h1 className="text-2xl font-orbitron font-bold text-primary neon-text">HYDRA</h1>
+            <h1 className="text-2xl font-orbitron font-bold text-primary neon-text">ZUROZIX</h1>
           </div>
           
           <div className="flex items-center gap-6">
