@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { useNavigate } from 'react-router-dom';
+import AnimatedCounter from '@/components/AnimatedCounter';
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -41,10 +42,10 @@ const Landing = () => {
   ];
 
   const stats = [
-    { value: '10,000+', label: 'Игр в библиотеке' },
-    { value: '5M+', label: 'Активных игроков' },
-    { value: '50+', label: 'Жанров игр' },
-    { value: '4.9★', label: 'Рейтинг пользователей' }
+    { value: 10000, suffix: '+', label: 'Игр в библиотеке' },
+    { value: 5000000, suffix: '+', label: 'Активных игроков', format: 'short' },
+    { value: 50, suffix: '+', label: 'Жанров игр' },
+    { value: 4.9, suffix: '★', label: 'Рейтинг пользователей', decimals: 1 }
   ];
 
   const systemRequirements = {
@@ -154,7 +155,19 @@ const Landing = () => {
             {stats.map((stat, index) => (
               <div key={index} className="text-center space-y-2">
                 <div className="text-4xl md:text-5xl font-orbitron font-bold text-primary neon-text">
-                  {stat.value}
+                  {stat.format === 'short' ? (
+                    <>
+                      <AnimatedCounter end={5} duration={2000} />
+                      <span>M{stat.suffix}</span>
+                    </>
+                  ) : (
+                    <AnimatedCounter 
+                      end={stat.value} 
+                      suffix={stat.suffix} 
+                      decimals={stat.decimals || 0}
+                      duration={2000}
+                    />
+                  )}
                 </div>
                 <div className="text-sm text-muted-foreground">{stat.label}</div>
               </div>
