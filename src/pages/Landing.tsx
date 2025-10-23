@@ -88,9 +88,9 @@ const Landing = () => {
             </a>
           </div>
 
-          <Button onClick={() => navigate('/launcher')} variant="outline">
+          <Button onClick={() => navigate('/auth')} variant="outline">
             <Icon name="LogIn" size={16} className="mr-2" />
-            Открыть лаунчер
+            Войти
           </Button>
         </div>
       </nav>
